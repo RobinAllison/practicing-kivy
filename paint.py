@@ -1,13 +1,17 @@
-#clicking a point on the screen is a MotionEvent and returns on the command line spos =(x-coord, y-coord) where the lower left is (0,0) and the upper right is (1,1,). It also returns pos=(something, somethingelse), but I don't know what this is.
+#Now every time you touch there will be a small yellow circle drawn.
 import kivy
 
 from kivy.app import App
 from kivy.uix.widget import Widget
-
+from kivy.graphics import Color, Ellipse
 
 class MyPaintWidget(Widget):
+
     def on_touch_down(self, touch):
-        print(touch)
+        with self.canvas:
+            Color(1,1,0)
+            d = 30.
+            Ellipse(pos=(touch.x - d / 2, touch.y - d / 2), size=(d,d))
 
 
 class MyPaintApp(App):
