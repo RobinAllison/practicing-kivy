@@ -1,9 +1,9 @@
-#Now every time you touch there will be a small yellow circle drawn.
+#Every time you touch there will be a small yellow circle drawn. Continuing to hold down and dragging has a yellow line follow the cursor.
 import kivy
 
 from kivy.app import App
 from kivy.uix.widget import Widget
-from kivy.graphics import Color, Ellipse
+from kivy.graphics import Color, Ellipse, Line
 
 class MyPaintWidget(Widget):
 
@@ -12,6 +12,10 @@ class MyPaintWidget(Widget):
             Color(1,1,0)
             d = 30.
             Ellipse(pos=(touch.x - d / 2, touch.y - d / 2), size=(d,d))
+            touch.ud['line'] = Line(points =(touch.x, touch.y))
+
+    def on_touch_move(self, touch):
+        touch.ud['line'].points += [touch.x, touch.y]
 
 
 class MyPaintApp(App):
