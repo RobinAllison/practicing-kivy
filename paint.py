@@ -1,6 +1,7 @@
-#Every time you touch there will be a small yellow circle drawn. Continuing to hold down and dragging has a yellow line follow the cursor.
+#Every time you touch there will be a small circle drawn. Continuing to hold down and dragging has a line follow the cursor. The color each time is random.
 import kivy
 
+from random import random
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.graphics import Color, Ellipse, Line
@@ -8,8 +9,9 @@ from kivy.graphics import Color, Ellipse, Line
 class MyPaintWidget(Widget):
 
     def on_touch_down(self, touch):
+        color = (random(), random(), random())
         with self.canvas:
-            Color(1,1,0)
+            Color(*color)
             d = 30.
             Ellipse(pos=(touch.x - d / 2, touch.y - d / 2), size=(d,d))
             touch.ud['line'] = Line(points =(touch.x, touch.y))
